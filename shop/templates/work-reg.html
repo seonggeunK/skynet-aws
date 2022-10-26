@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+  {% include "navbar.html" %}
+
+  <main id="main">
+
+    <section class="section pb-5">
+      <div class="container">
+
+        <div class="row mb-5 align-items-end">
+          <div class="col-md-6" data-aos="fade-up">
+            <h2>Work registration page</h2>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
+
+            <form method="POST" enctype="multipart/form-data" action="/work-pro" id="frmshop">
+            {% csrf_token %}
+
+              <div class="row gy-3">
+                <div class="col-md-12 form-group">
+                  <label for="title">Title</label>
+                  <input type="text"  class="form-control" name="title" id="title" required>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="summary">Summary</label>
+                  <input type="text" class="form-control" name="summary" id="summary" required>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" class="form-control" name="subject" id="subject" required>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="contents">Contents</label>
+                  <textarea class="form-control" name="contents" id="contents" cols="30" rows="10" required></textarea>
+                </div>
+                 <div class="col-md-12 form-group">
+                  <label for="subject">Image</label>
+                  <input type = "file" name="ufile" id="ufile" required>
+                </div>
+                <div class="col-md-6 mt-0 form-group">
+                  <label></label>
+                  <input type="submit" class="readmore d-block w-100" value="Register">
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main><!-- End #main -->
+
+      {% include "footer.html" %}
+{% endblock %}
