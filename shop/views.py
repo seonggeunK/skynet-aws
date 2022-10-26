@@ -15,6 +15,10 @@ def index(request):
     print("index 함수입니다.")
     return render(request, "index.html")
 
+def workReg(request):
+    print("workReg 함수입니다.")
+    return render(request, "work-reg.html")
+
 
 
 
