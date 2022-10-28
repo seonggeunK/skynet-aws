@@ -88,5 +88,30 @@ def 함수명(request):
 - 뷰(HTML) 샘플 다운로드   
 https://bootstrapmade.com/
 
+- 모르면 일단 이거만 보세요
+```
+# DB 연동 셋팅
+settings.py
+
+# 개발할때
+url.py, view.py, html, model.py 
+```
+
+mysql 모듈 설치
+```
+conda install -n 가상환경명 mysqlclient
+```
+
+모델을 이용한 데이터 관리
+- makemigrations 명령으로 DB셋팅 수행을 위한 파일생성.
+```
+python manage.py makemigrations
+```
+
+- migrate 명령으로 테이블 생성
+```
+python manage.py migrate
+```
+
 
 

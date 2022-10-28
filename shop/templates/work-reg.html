@@ -19,10 +19,15 @@
         <div class="row">
           <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
 
-            <form method="POST" enctype="multipart/form-data" action="/work-pro" id="frmshop">
+            <form method="POST" action="/work-pro" id="frmshop">
             {% csrf_token %}
+              <input type="hidden" name="no" id="no" />
 
               <div class="row gy-3">
+                <div class="col-md-12 form-group">
+                  <label for="category">Category</label>
+                  <input type="text"  class="form-control" name="category" id="category" required>
+                </div>
                 <div class="col-md-12 form-group">
                   <label for="title">Title</label>
                   <input type="text"  class="form-control" name="title" id="title" required>
