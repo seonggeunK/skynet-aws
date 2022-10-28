@@ -1,55 +1,76 @@
 from django.shortcuts import render
-from django.shortcuts import redirect
-from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse, JsonResponse
-# Create your views here.
-import datetime
-import os
-import random
-
 from shop.models import Shop
+from django.shortcuts import redirect
 
+from django.core.files.storage import FileSystemStorage
+
+import datetime
+import random
+import sys, os
+
+from django.http import HttpResponse, JsonResponse
+
+from django.views.decorators.csrf import csrf_exempt
+
+
+# Create your views here.
 
 # def index(request):
 #     return HttpResponse('''
-#         <html>
-#             <body>
-#                 <h1> Hello Django! </h1>
-#             </body>
-#         </html>
+#     <html>
+#         <body>
+#         <h1> 안녕하세요 ! </h1>
+#         </body>
+#     </html>
 #     ''')
 
 def index(request):
-    print("index 함수입니다.")
-    return render(request, "index.html")
+    print("index")
+    rsshop = Shop.objects.all()
+
+    return render(request, "index.html", {
+        'rsshop': rsshop
+    })
 
 def about(request):
-    print("about 함수입니다.")
+    print("about")
     return render(request, "about.html")
 
 def services(request):
-    print("about 함수입니다.")
+    print("services")
     return render(request, "services.html")
 
-def works(request):
-    print("works 함수입니다.")
-    return render(request, "works.html")
-
 def contact(request):
-    print("contact 함수입니다.")
+    print("contact")
     return render(request, "contact.html")
 
+def works(request):
+    print("works")
+    rsshop = Shop.objects.all()
+
+    return render(request, "works.html", {
+        'rsshop': rsshop
+    })
+
+
+
+def workSingle(request, no):
+    print("workSigle")
+    shop = Shop.objects.get(no=no)
+    return render(request, "work-single.html", {
+        'shop': shop
+    })
+
+
 def workReg(request):
-    print("workReg 함수입니다.")
+    print("workReg")
     return render(request, "work-reg.html")
 
+
 def workPro(request):
-    print("workReg 함수입니다.")
-    
-    # 파라메타 데이터 받아오기
     no = request.POST['no']
-    category = request.POST['category']
     title = request.POST['title']
+    category = request.POST['category']
     summary = request.POST['summary']
     subject = request.POST['subject']
     contents = request.POST['contents']
@@ -67,7 +88,7 @@ def workPro(request):
 
         name = fs.save(new_file_name + name_ext, uploaded_file)
 
-    if no in (None, ''):    # insert 데이터 추가
+    if no in (None, ''):
         rows = Shop.objects.create(
             title=title,
             category=category,
@@ -78,7 +99,7 @@ def workPro(request):
             file_name=name,
             file_location=new_file_location
         )
-    else:   # update 데이터 수정
+    else:
         shop = Shop.objects.get(no=no)
         shop.title = title
         shop.category = category
@@ -90,6 +111,15 @@ def workPro(request):
             shop.file_name = name,
             shop.file_location = new_file_location
         shop.save()
+    return redirect('/')
 
-    return redirect("/works")
+def workModify(request, no):
+    print("workModify")
+    shop = Shop.objects.get(no=no)
+    return render(request, "work-reg.html", {
+        'shop': shop
+    })
 
+def workRemove(request, no):
+    Shop.objects.filter(no=no).delete()
+    return redirect('/works')
