@@ -45,9 +45,11 @@ def workReg(request):
 
 def workPro(request):
     print("workReg 함수입니다.")
+    
+    # 파라메타 데이터 받아오기
     no = request.POST['no']
-    title = request.POST['title']
     category = request.POST['category']
+    title = request.POST['title']
     summary = request.POST['summary']
     subject = request.POST['subject']
     contents = request.POST['contents']
@@ -65,7 +67,7 @@ def workPro(request):
 
         name = fs.save(new_file_name + name_ext, uploaded_file)
 
-    if no in (None, ''):
+    if no in (None, ''):    # insert 데이터 추가
         rows = Shop.objects.create(
             title=title,
             category=category,
@@ -76,7 +78,7 @@ def workPro(request):
             file_name=name,
             file_location=new_file_location
         )
-    else:
+    else:   # update 데이터 수정
         shop = Shop.objects.get(no=no)
         shop.title = title
         shop.category = category
