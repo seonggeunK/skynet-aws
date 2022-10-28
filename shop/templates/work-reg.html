@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
 
-            <form method="POST" action="/work-pro" id="frmshop">
+            <form method="POST" enctype="multipart/form-data" action="/work-pro" id="frmshop">
             {% csrf_token %}
               <input type="hidden" name="no" id="no" />
 
