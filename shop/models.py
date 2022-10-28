@@ -15,7 +15,7 @@ class Shop(models.Model):
     updatedate = models.DateTimeField(db_column='updatedate', auto_now=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'shop'
 
     def __str__(self):
