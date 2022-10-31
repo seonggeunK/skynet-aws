@@ -107,11 +107,11 @@ def workPro(request):
         shop.subject = subject
         shop.contents = contents
         if 'ufile' in request.FILES:
-            shop.org_file_name = org_file_name,
-            shop.file_name = name,
+            shop.org_file_name = org_file_name
+            shop.file_name = name
             shop.file_location = new_file_location
         shop.save()
-    return redirect('/')
+    return redirect('/works')
 
 def workModify(request, no):
     print("workModify")
