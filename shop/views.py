@@ -8,6 +8,13 @@ import datetime
 import random
 import sys, os
 
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
+import joblib
+
 from django.http import HttpResponse, JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt
@@ -26,23 +33,59 @@ from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     print("index")
+    category = 0
+
     rsshop = Shop.objects.all()
 
     return render(request, "index.html", {
-        'rsshop': rsshop
+        "rsshop": rsshop,
+        "category": category
     })
+
+
+def ml(request):
+    print("login")
+    return render(request, "ml.html")
+
+
+def mlPro(request):
+    print("loginPro")
+    age = request.POST['age']
+    sex = request.POST['sex']
+    occupation = request.POST['occupation']
+    hobby = request.POST['hobby']
+
+    arr = np.array([[age, sex, occupation, hobby]])
+
+    # 모델 불러오기
+    model = joblib.load('shop/shopknn.pkl')
+    # 예측
+    pred = model.predict(arr)
+    print(pred)
+
+
+    rsshop = Shop.objects.all()
+
+    return render(request, "works.html", {
+        'rsshop': rsshop,
+        'category': pred
+    })
+
 
 def about(request):
     print("about")
     return render(request, "about.html")
 
+
 def services(request):
     print("services")
     return render(request, "services.html")
 
+
 def contact(request):
     print("contact")
     return render(request, "contact.html")
+
 
 def works(request):
     print("works")
@@ -51,7 +94,6 @@ def works(request):
     return render(request, "works.html", {
         'rsshop': rsshop
     })
-
 
 
 def workSingle(request, no):
@@ -113,12 +155,14 @@ def workPro(request):
         shop.save()
     return redirect('/works')
 
+
 def workModify(request, no):
     print("workModify")
     shop = Shop.objects.get(no=no)
     return render(request, "work-reg.html", {
         'shop': shop
     })
+
 
 def workRemove(request, no):
     Shop.objects.filter(no=no).delete()

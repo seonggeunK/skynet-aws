@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+  {% include "navbar.html" %}
+
+  <main id="main">
+
+    <section class="section pb-5">
+      <div class="container">
+
+        <div class="row mb-5 align-items-end">
+          <div class="col-md-6" data-aos="fade-up">
+            <h2>AI</h2>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-up">
+            <form method="POST"  action="/ml-pro" id="frmshop">
+            {% csrf_token %}
+
+              <div class="row gy-3">
+                <div class="col-md-12 form-group">
+                  <label for="age">Age</label>
+                  <input type="number" value="" name="age" id="age" required>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label>Sex</label>
+                  <label for="male">남성</label> <input type="radio" value="1" name="sex" id="male" >
+                  <label for="female">여성</label><input type="radio" value="2" name="sex" id="female" >
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="occupation">Occupation</label>
+                  <select name="occupation" id="occupation">
+                    <option value="1">회사원</option>
+                    <option value="2">주부</option>
+                    <option value="3">학생</option>
+                    <option value="4">전문직</option>
+                  </select>
+<!--                  <input type="text" value="" class="form-control" name="occupation" id="occupation" required>-->
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="hobby">Hobby</label>
+                  <select name="hobby" id="hobby">
+                    <option value="1">독서</option>
+                    <option value="2">Game</option>
+                    <option value="3">레저/스포츠</option>
+                    <option value="4">영화/음악</option>
+                  </select>
+                </div>
+                <div class="col-md-6 mt-0 form-group">
+                  <label></label>
+                  <input type="submit" class="readmore d-block w-100" value="Register">
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main><!-- End #main -->
+
+      {% include "footer.html" %}
+{% endblock %}

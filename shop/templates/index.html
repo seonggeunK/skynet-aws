@@ -17,11 +17,11 @@
                 </div>
                 <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
                     <div id="filters" class="filters">
-                        <a href="#" data-filter="*" class="active">All</a>
-                        <a href="#" data-filter=".web">Web</a>
-                        <a href="#" data-filter=".design">Design</a>
-                        <a href="#" data-filter=".branding">Branding</a>
-                        <a href="#" data-filter=".photography">Photography</a>
+                        <a href="#" data-filter="*" {% if category == 0 %} class="active" {% endif %} >All</a>
+                        <a href="#" data-filter=".fashion" {% if category == 1 %} class="active" {% endif %}>Fashion</a>
+                        <a href="#" data-filter=".beauty" {% if category == 2 %} class="active" {% endif %}>Beauty</a>
+                        <a href="#" data-filter=".automotive" {% if category == 3 %} class="active" {% endif %}>Automotive</a>
+                        <a href="#" data-filter=".sports" {% if category == 4 %} class="active" {% endif %}>Sports</a>
                     </div>
 
                 </div>
