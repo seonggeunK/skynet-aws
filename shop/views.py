@@ -34,12 +34,15 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     print("index")
     category = 0
+    categoryName = 'All'
 
     rsshop = Shop.objects.all()
 
     return render(request, "index.html", {
         "rsshop": rsshop,
-        "category": category
+        "category": category,
+        "categoryName": categoryName,
+
     })
 
 
@@ -55,20 +58,35 @@ def mlPro(request):
     occupation = request.POST['occupation']
     hobby = request.POST['hobby']
 
-    arr = np.array([[age, sex, occupation, hobby]])
+    arr = np.array([[age, sex, occupation, hobby]], dtype=int)
 
     # 모델 불러오기
     model = joblib.load('shop/shopknn.pkl')
     # 예측
     pred = model.predict(arr)
-    print(pred)
+    print('pred : {}'.format(pred))
+    # All
+    # Fashion
+    # Beauty
+    # Automotive
+    # Sports
+    categoryName = 'All'
+    if pred == 1:
+        categoryName = 'Fashion'
+    elif pred == 2:
+        categoryName = 'Beauty'
+    elif pred == 3:
+        categoryName = 'Automotive'
+    elif pred == 4:
+        categoryName = 'Sports'
 
 
     rsshop = Shop.objects.all()
 
     return render(request, "works.html", {
         'rsshop': rsshop,
-        'category': pred
+        'category': pred,
+        'categoryName': categoryName
     })
 
 
@@ -89,10 +107,15 @@ def contact(request):
 
 def works(request):
     print("works")
+    category = 0
+    categoryName = 'All'
     rsshop = Shop.objects.all()
 
     return render(request, "works.html", {
-        'rsshop': rsshop
+        'rsshop': rsshop,
+        'category': category,
+        'categoryName': categoryName
+
     })
 
 

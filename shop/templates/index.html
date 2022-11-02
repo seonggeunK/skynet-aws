@@ -27,10 +27,11 @@
                 </div>
             </div>
 
+            {% with 'display: none;' as v_style  %}
             <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
                 {% if rsshop|length != 0 %}
                 {% for i in rsshop %}
-                <div class="item {{i.category|lower}} col-sm-6 col-md-4 col-lg-4 mb-4">
+                <div class="item {{i.category|lower}} col-sm-6 col-md-4 col-lg-4 mb-4" {% if i.category != categoryName and category != 0 %} style="{{v_style}}" {% endif %} >
                     <a href="work-single/{{i.no}}" class="item-wrap fancybox">
                         <div class="work-info">
                             <h3>{{i.subject}}</h3>
@@ -43,9 +44,8 @@
                 {% else %}
                 <p class="mb-0">The work does not exist.</p>
                 {% endif %}
-
-
             </div>
+            {% endwith %}
         </div>
     </section><!-- End  Works Section -->
 
@@ -194,5 +194,15 @@
     </section><!-- End Testimonials Section -->
 
 </main><!-- End #main -->
+
+{% block script %}
+<script language="JavaScript">
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("hello world");
+      document.getElementById("beauty").click();
+      alert('a');
+    });
+</script>
+{% endblock %}
 {% include "footer.html" %}
 {% endblock %}
