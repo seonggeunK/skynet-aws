@@ -113,5 +113,15 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+- RDS 유저 & Database 생성
+```
+CREATE user 'scott'@'%' IDENTIFIED BY 'tiger';
+
+CREATE DATABASE shop;
+
+GRANT ALL ON shop.* TO 'scott';
+
+```
+
 
 
